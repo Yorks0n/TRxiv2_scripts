@@ -1,0 +1,45 @@
+## main.yml
+name: 'TRxiv update'
+
+# 触发条件
+## 条件1，代码push进仓库
+## 条件2，定时任务，在UTC 10和22点，即北京时间18点和6点运行
+on:
+  push:
+  schedule:
+    - cron: '0 10,22 * * *'
+
+jobs:
+  TRxiv_update_job:
+    runs-on: ubuntu-latest
+    name: Update the data file
+    steps: 
+      ## 必须有这一步，让运行的文件夹成为一个git repo
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: run script
+        run: |
+         node dist/index.js
+         node dist/json2md.js
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+            hugo-version: "latest"
+
+      - name: Build Web
+        run: |
+         cd ./hugo_site
+         hugo
+
+      - name: Deploy Web
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+            PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+            EXTERNAL_REPOSITORY: Yorks0n/TRxiv2
+            PUBLISH_BRANCH: main
+            PUBLISH_DIR: ./hugo_site/public
+            commit_message: ${{ github.event.head_commit.message }}

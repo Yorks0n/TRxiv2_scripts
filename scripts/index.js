@@ -158,7 +158,7 @@ async function main() {
     });
 
     // sort all the papers by score, and find up to 10 papers of each category
-    const sortedMergedData = filteredMergedData.sort((a, b) => b.score - a.score);
+    const sortedMergedData = filteredMergedData.sort((a, b) => b.X1w - a.X1w);
     // 对每个 category 取最多 10 个分数最高的结果
     const top10Data = {};
     const top10MergedData = [];
