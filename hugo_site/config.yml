@@ -6,7 +6,7 @@ theme: PaperMod
 params:
     homeInfoParams:
         Title: Track Weekly Popular bioRxiv Papers
-        Content: Presenting up to ten most popular bioRxiv papers in each category of the week. 
+        Content: Presenting up to ten most popular bioRxiv papers of the week in each category. 
 paginate: 50
 
 module:

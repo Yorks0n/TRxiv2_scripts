@@ -119,7 +119,7 @@ function printProgressBar(percent, name) {
 
 async function main() {
     // 这里作为调试，先获取少一点的数据，暂时只取1w，1页
-    const altData = await getAltData(timeframe = ['1w'], pageLen = 1);
+    const altData = await getAltData(timeframe = ['1w'], pageLen = 15);
     //console.log(altData);
     console.log("In 1w window found " + altData.length + " Altmetric data.");
 
