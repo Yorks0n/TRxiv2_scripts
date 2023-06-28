@@ -1,0 +1,15 @@
+baseURL: http://example.org/
+languageCode: en-us
+title: TRxiv2
+theme: PaperMod
+
+params:
+    homeInfoParams:
+        Title: Track Weekly Popular bioRxiv Papers
+        Content: Presenting up to ten most popular bioRxiv papers in each category of the week. 
+paginate: 50
+
+module:
+  mounts:
+    - source: node_modules/bootstrap/dist/js/bootstrap.bundle.min.js
+      target: assets/js/bootstrap.bundle.min.js

@@ -1,0 +1,44 @@
+<!-- here -->
+
+{{- $json := getJSON  "data/data.json" -}}
+{{ $cate := .Get "category" }}
+{{- $products := where $json "category" "==" $cate -}}
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  {{- range $products -}}
+  <div class="accordion-item">
+    <h3 class="accordion-header" id="flush-heading{{ .doi }}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ .doi }}" aria-expanded="false" aria-controls="flush-collapse{{ .doi }}">
+        <p class="paperTitle">{{ .title }}</p>
+      </button>
+    </h3>
+    <div id="flush-collapse{{ .doi }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ .doi }}" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <p class="author">Authors: {{ .authors }}</p>
+        <p class="info">Score: {{printf "%.1f" .score}}, Published: {{ .date }} </p>
+        <p class="info">DOI: <a href='https://doi.org/{{.doi}}' target='https://doi.org/{{.doi}}'> {{ .doi }}</a></p>
+        <p class="abstract">{{ .abstract }}</p>
+      </div>
+    </div>
+  </div>
+  {{- end }}
+</div>
+
+<!--
+{{- range $products -}}
+  <h3>{{ .title }}</h3>
+  <p class="author">Authors: {{ .authors }}</p>
+  <p class="info">Score: {{printf "%.1f" .score}}, Published: {{ .date }} </p>
+  <p class="info">DOI: <a href='https://doi.org/{{.doi}}' target='https://doi.org/{{.doi}}'> {{ .doi }}</a></p>
+  <p class="abstract">{{ .abstract }}</p>
+  
+{{- end -}}
+-->
+
+
+<!-- JavaScript and dependencies -->
+
+{{ $bootstrap := resources.Get "js/bootstrap.bundle.min.js" }}
+{{ $js := slice $bootstrap | resources.Concat "js/bundle.js" | resources.Minify }}
+
+<script src="{{$js.RelPermalink}}" defer></script>
