@@ -1,4 +1,10 @@
 {{- with site.Params.homeInfoParams }}
+<style>
+    .first-entry.home-info {
+      margin-bottom: 0px;
+    }
+  </style>
+
 <article class="first-entry home-info">
     <header class="entry-header">
         <h1>{{ .Title | markdownify }}</h1>

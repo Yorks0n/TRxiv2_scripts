@@ -34,7 +34,13 @@ jobs:
         run: |
          cd ./hugo_site
          hugo
-
+      
+      # 创建 CNAME，这个是原始配置中没有的
+      - uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: "./hugo_site/public/CNAME"
+          FILE_DATA: "trxiv.yorks0n.com"
+      
       - name: Deploy Web
         uses: peaceiris/actions-gh-pages@v3
         with:
